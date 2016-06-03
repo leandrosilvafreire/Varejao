@@ -15,10 +15,9 @@ public class EstadoDaoTest {
 
 		Estado estado = new Estado();
 
-		estado.setNome("São Paulo");
-		estado.setSigla("SP");
-		estado.setNome("Rio de Janeiro");
-		estado.setSigla("RJ");
+		estado.setNome("Mato Grosso do Sul");
+		estado.setSigla("MS");
+		
 
 		EstadoDao estadoDao = new EstadoDao();
 		estadoDao.salvar(estado);
@@ -66,7 +65,7 @@ public class EstadoDaoTest {
 	@Test
 	@Ignore
 	public void editar() {
-		Long codigo = 1L;
+		Long codigo = 4L;
 		EstadoDao estadoDao = new EstadoDao();
 		Estado estado = estadoDao.consultar(codigo);
 
@@ -76,8 +75,8 @@ public class EstadoDaoTest {
 			System.out.println("Registro antes de atualizar: ");
 			System.out.println(estado.getSigla() + " " + estado.getNome());
 
-			estado.setSigla("SP");
-			estado.setNome("São Paulo");
+			estado.setSigla("RS");
+			estado.setNome("Rio Grande do Sul");
 			estadoDao.editar(estado);
 
 			System.out.println("Registro atualizado: ");

@@ -17,9 +17,9 @@ public class CidadeDaoTest {
 		Cidade cidade = new Cidade();
 
 		EstadoDao estadoDao = new EstadoDao();
-		Estado estado = estadoDao.consultar(1L);
+		Estado estado = estadoDao.consultar(2L);
 		cidade.setEstado(estado);
-		cidade.setNome("Ribeirão Preto");
+		cidade.setNome("São Paulo");
 
 		CidadeDao cidadedao = new CidadeDao();
 		cidadedao.salvar(cidade);

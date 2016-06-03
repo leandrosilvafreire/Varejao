@@ -23,7 +23,7 @@ public class Item extends GenericEntity {
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
-	private Funcionario funcionario;
+	private Venda venda;
 
 	public short getQuantidade() {
 		return quantidade;
@@ -49,13 +49,14 @@ public class Item extends GenericEntity {
 		this.produto = produto;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Venda getVenda() {
+		return venda;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setVenda(Venda venda) {
+		this.venda = venda;
 	}
+
 	
 	
 
