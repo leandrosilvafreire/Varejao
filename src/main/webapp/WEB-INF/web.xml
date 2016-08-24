@@ -6,4 +6,30 @@
 
 	<!-- Nome da Aplicação -->
 	<display-name>Varejao</display-name>
+
+	<!-- Projeto -->
+	<context-param>
+		<!-- nome -->
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<!-- Parte de desenvolvimento rastreia erros -->
+		<param-value>Development</param-value>
+	</context-param>
+
+	<!-- Todas as requisições vão para o servlet configuração jsf -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Em que momento eu vou precisar do jsf -->
+	<servlet-mapping>
+		<!-- Linka os dois nomes -->
+		<servlet-name>Faces Servlet</servlet-name>
+		<!-- gerencia o arquivo xhtml -->
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 </web-app>
+

@@ -84,5 +84,20 @@ public class EstadoDaoTest {
 		}
 
 	}
+	
+	@Test
+	//@Ignore
+	public void merge() {
+
+		
+		
+
+		EstadoDao estadoDao = new EstadoDao();
+		Estado consulta = estadoDao.consultar(5L);
+		
+		consulta.setNome("Rio Grande do Norte");
+		consulta.setSigla("RN");
+		estadoDao.merge(consulta);
+	}
 
 }

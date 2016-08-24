@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Estados</title>
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+	<h:form>
+		<p:panel header="Estados">
+			<p:dataTable emptyMessage="Nenhum Registro Encontrado"
+				paginator="true" value="#{estadoBean.estados}" var="est" rows="5">
+				<f:facet name="footer">
+					<p:commandButton value="Novo" oncomplete="PF('dlgEstado').show();"
+						actionListener="#{estadoBean.novo()}"
+						update=":frmCadEstados:pgEstado" />
+				</f:facet>
+
+				<p:column headerText="Estados" sortBy="#{est.nome}"
+					filterBy="#{est.nome}">
+					<h:outputText value="#{est.nome}" />
+				</p:column>
+				<p:column headerText="Sigla" sortBy="#{est.sigla}"
+					filterBy="#{est.sigla}">
+					<h:outputText value="#{est.sigla}" />
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash">
+						<p:confirm header="Confirmação" message="Deseja excluir o estado?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Estados" widgetVar="dlgEstado" draggable="false"
+		resizable="false" modal="true">
+		<h:form id="frmCadEstados">
+			<h:panelGrid id="pgEstado" columns="2">
+				<p:outputLabel value="Sigla: " />
+				<p:inputText maxlength="2" size="5"
+					value="#{estadoBean.estado.sigla}" />
+
+				<p:outputLabel value="Nome: " />
+				<p:inputText maxlength="30" size="20"
+					value="#{estadoBean.estado.nome}" />
+			</h:panelGrid>
+			<h:panelGrid columns="3">
+				<p:commandButton value="Salvar"
+					actionListener="#{estadoBean.salvar()}"
+					update=":mensagem :frmCadEstados:pgEstado" />
+				<p:commandButton value="Cancelar" />
+				<p:commandButton value="Fechar" oncomplete="PF('dlgEstado').hide();" />
+			</h:panelGrid>
+		</h:form>
+
+	</p:dialog>
+</h:body>
+</html>

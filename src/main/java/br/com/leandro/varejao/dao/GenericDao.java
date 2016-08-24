@@ -43,6 +43,7 @@ public class GenericDao<Entidade> {
 			transacao.commit();
 
 		} catch (RuntimeException ex) {
+			ex.printStackTrace();
 			if (transacao != null) {
 				// desfaz a transação
 				transacao.rollback();
@@ -158,6 +159,37 @@ public class GenericDao<Entidade> {
 		} finally {// fecha a sessão independente se cair no try ou no catch
 			sessao.close();
 		}
+	}
+	
+	public void merge(Entidade entidade) {
+		// Abre a fabrica de sessões, pega uma sessão aberta
+		Session sessao = HibernateUtil.getFabricasessoes().openSession();
+
+		// Cria uma transação
+		Transaction transacao = null;
+
+		try {
+			// Inicia a transação
+			transacao = sessao.beginTransaction();
+			// Salva o objeto
+			sessao.merge(entidade);
+			// Confirma a transação
+			transacao.commit();
+
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (transacao != null) {
+				// desfaz a transação
+				transacao.rollback();
+			}
+			// repropaga a transação para camadas superiores e não fica
+			// invisivel o erro
+			throw ex;
+
+		} finally {// fecha a sessão independente se cair no try ou no catch
+			sessao.close();
+		}
+
 	}
 
 }
